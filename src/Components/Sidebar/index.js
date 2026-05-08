@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import VertBannerBox from '../../Assets/Images/Banners/Listing_Vertical_Banner.png'
-import FormGroup from '@mui/material/FormGroup';
+// import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import RangeSlider from 'react-range-slider-input';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
 
   const [value, setvalue] = useState([100, 60000]);
-  const [value2, setvalue2] =useState(0)
+  // const [value2, setvalue2] =useState(0)
   return (
     <>
       <div className="sidebar">
@@ -73,7 +73,9 @@ function Sidebar() {
           </div>
         </div>
 
-        <Link to='#'><img src={VertBannerBox} className='w-100' style={{marginLeft: '-40px'}} alt="Not Found" /></Link>
+        <Link to='#'><img src={VertBannerBox} className='w-100 ' style={{marginLeft: '-37px', borderRadius:'15px'}} alt="Not Found" /></Link>
+
+       
         
 
       </div>

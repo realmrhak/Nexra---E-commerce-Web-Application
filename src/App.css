@@ -599,12 +599,6 @@ nav .navpart2 ul li:hover .submenu {
   cursor: pointer;
 }
 
-/* ✨ Smooth lift effect */
-.productRow2 .productItem:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-
 .productItem .actions {
   position: absolute;
   top: 5px;
@@ -847,6 +841,11 @@ nav .navpart2 ul li:hover .submenu {
 .productRow2 {
   flex-wrap: wrap;
   gap: 10px;
+}
+/* ✨ Smooth lift effect */
+.productRow2 .productItem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .productRow2 .productItem {
@@ -1227,10 +1226,6 @@ footer .topInfo .col span{
 .css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root{
   padding: 2px !important;
 }
-.product_listing_page .productListing .content_right{
-  width: 80%;
-  flex: 0 0 80%;
-}
 .product_listing_page .productListing .sidebar .filterBox{
   margin-bottom: 60px !important;
 }
@@ -1252,8 +1247,58 @@ footer .topInfo .col span{
   height: 12px !important;
 }
 
-.showBy{
+.product_listing_page .productListing .content_right{
+  width: 80%;
+  flex: 0 0 80%;
+}
+.product_listing_page .productListing .content_right .showBy{
   width: 100%;
-  height: 50px;
-  background: #f7f8fd;
+  height: auto;
+  background: #f1f3ff;
+  padding: 15px 25px;
+  border-radius: 20px;
+}
+.product_listing_page .productListing .content_right .showBy .btnWrapper button{
+  min-width: 35px !important;
+  height: 35px !important;
+  width: 35px !important;
+  border-radius: 50% !important;
+  color: #000;
+}
+.product_listing_page .productListing .content_right .showBy .btnWrapper .ico1{
+  font-size: 18px !important;
+}
+.product_listing_page .productListing .content_right .showBy .btnWrapper .ico2{
+  font-size: 15px !important;
+}
+.product_listing_page .productListing .content_right .showBy .btnWrapper button svg{
+  color: #000;
+  opacity: 0.5;
+}
+.product_listing_page .productListing .content_right .showBy .btnWrapper button:hover svg{
+  opacity: 1;
+}
+
+.showByFilter button{
+  min-width: auto !important;
+  color: #000;
+  text-transform: capitalize;
+  font-family: poppins !important;
+}
+.showByFilter button svg{
+  color: #000;
+  opacity: 0.6;
+  margin-left: 5px;
+}
+.showPerPageDropdown .MuiPaper-root{
+  width: 80px;  
+}
+.showPerPageDropdown .css-1rju2q6-MuiButtonBase-root-MuiMenuItem-root{
+  font-family: poppins !important;
+  flex-direction: column;
+}
+.showPerPageDropdown .css-1rju2q6-MuiButtonBase-root-MuiMenuItem-root:hover{
+  color: #10B981 !important;
+  background: #dcf7ef !important;
+  width: 100% !important;
 }
