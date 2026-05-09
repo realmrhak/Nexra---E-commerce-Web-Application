@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from "@mui/material/Button";
 import { SlMenu } from "react-icons/sl";
 import { HiViewGrid } from "react-icons/hi";
@@ -8,8 +8,19 @@ import { FaAngleDown } from 'react-icons/fa'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Sidebar from '../../Components/Sidebar';
-import HoriBannerBox from '../../Assets/Images/Banners/Listing_Horizontal_Banner.jpg'
-import ProductCardSection from '../../Components/ProductCardSection/index'
+import HoriBannerBox from '../../Assets/Images/Banners/Listing_Horizontal_Banner.jpg';
+import ProductItem from '../../Components/ProductItem';
+import BaggyPant from "../../Assets/Images/Items/Baggy_Pants.jpeg";
+import Zipper1 from "../../Assets/Images/Items/Zipper-1.jpeg";
+import Jacket1 from "../../Assets/Images/Items/Jacket-1.jpeg";
+import Wallet1 from "../../Assets/Images/Items/Wallet-1.jpeg";
+import SunGlasses from "../../Assets/Images/Items/Sun_Glasses.jpeg";
+import TShirt from "../../Assets/Images/Items/T_Shirt.jpeg";
+import Jacket2 from "../../Assets/Images/Items/Jacket-2.jpeg";
+import Caps1 from "../../Assets/Images/Items/Caps-1.jpeg";
+import ProductModel from "../../Components/ProductModel";
+import Pagination from '@mui/material/Pagination';
+// import Stack from '@mui/material/Stack';
 
 
 function Listing() {
@@ -25,6 +36,93 @@ function Listing() {
     setAnchorEl(null);
   };
 
+  const [productView, setProductView] = useState('four');
+
+  const products = [
+
+    {
+      id: 1,
+      img: BaggyPant,
+      title: "Baggy Pant",
+      oldPrice: "$20.00",
+      newPrice: "$14.00"
+    },
+    {
+      id: 2,
+      img: Zipper1,
+      title: "Zipper Jacket",
+      oldPrice: "$25.00",
+      newPrice: "$18.00"
+    },
+    {
+      id: 3,
+      img: Jacket1,
+      title: "Winter Jacket",
+      oldPrice: "$40.00",
+      newPrice: "$30.00"
+    },
+    {
+      id: 4,
+      img: Wallet1,
+      title: "Leather Wallet",
+      oldPrice: "$15.00",
+      newPrice: "$10.00"
+    },
+    {
+      id: 5,
+      img: SunGlasses,
+      title: "Sun Glasses",
+      oldPrice: "$22.00",
+      newPrice: "$16.00"
+    },
+    {
+      id: 6,
+      img: TShirt,
+      title: "T-Shirt",
+      oldPrice: "$18.00",
+      newPrice: "$12.00"
+    },
+    {
+      id: 7,
+      img: Jacket2,
+      title: "Casual Jacket",
+      oldPrice: "$35.00",
+      newPrice: "$28.00"
+    },
+    {
+      id: 8,
+      img: Caps1,
+      title: "Stylish Cap",
+      oldPrice: "$10.00",
+      newPrice: "$7.00"
+    }
+
+  ];
+
+
+
+  const [isOpenProductModel, setisOpenProductModel] = useState(false);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+
+
+  const viewProductDetails = (product) => {
+
+    setSelectedProduct(product);
+
+    setisOpenProductModel(true);
+
+  };
+
+
+
+  const closeProductModal = () => {
+
+    setisOpenProductModel(false);
+
+  };
+
 
   return (
     <>
@@ -38,10 +136,18 @@ function Listing() {
 
               <div className="showBy ml-4 mb-3 mt-3 d-flex align-items-center">
                 <div className="d-flex align-items-center btnWrapper">
-                  <Button className='ico2'><SlMenu /></Button>
-                  <Button className='ico1'><HiViewGrid /></Button>
-                  <Button className='ico1'><BiSolidGrid /></Button>
-                  <Button className='ico2'><TfiLayoutGrid4Alt /></Button>
+                  <Button  className={`ico2 ${productView === 'one' ? 'act' : ''}`}
+                    onClick={() => setProductView('one')}><SlMenu /></Button>
+                  <Button  className={`ico1 ${productView === 'two' ? 'act' : ''}`}
+                    onClick={() => setProductView('two')}><HiViewGrid /></Button>
+                  <Button  className={`ico1 ${productView === 'three' ? 'act' : ''}`}
+                    onClick={() => setProductView('three')}><BiSolidGrid /></Button>
+                  <Button
+                    className={`ico2 ${productView === 'four' ? 'act' : ''}`}
+                    onClick={() => setProductView('four')}
+                  >
+                    <TfiLayoutGrid4Alt />
+                  </Button>
                 </div>
 
                 <div className="ml-auto showByFilter">
@@ -67,14 +173,39 @@ function Listing() {
                 </div>
               </div>
 
-              <div className="productListing ml-5">
-                <ProductCardSection />
-                <ProductCardSection />
-                <ProductCardSection />
+              <div className="productGrid ml-5">
+
+                {
+                  products.map((product) => (
+
+                    <ProductItem
+                      key={product.id}
+                      itemView={productView}
+                      product={product}
+                      viewProductDetails={viewProductDetails}
+                    />
+
+                  ))
+                }
+
+              </div>
+
+              <div className="PaginationPart d-flex align-items-center justify-content-center mt-5">
+                <Pagination count={8} color='primary' />
               </div>
             </div>
           </div>
         </div>
+        {
+          isOpenProductModel && (
+
+            <ProductModel
+              product={selectedProduct}
+              closeProductModal={closeProductModal}
+            />
+
+          )
+        }
 
       </section>
     </>

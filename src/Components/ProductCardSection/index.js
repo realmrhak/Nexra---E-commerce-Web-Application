@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '@mui/material/Button';
 import { TfiFullscreen } from "react-icons/tfi";
 import { IoMdHeartEmpty } from "react-icons/io";
+import ProductModel from '../ProductModel'
 import Rating from "@mui/material/Rating";
 import BaggyPant from "../../Assets/Images/Items/Baggy_Pants.jpeg";
 import Zipper1 from "../../Assets/Images/Items/Zipper-1.jpeg";
@@ -73,6 +74,16 @@ function ProductCardSection() {
     }
   ];
 
+  const [isOpenProductModel, setisOpenProductModel] = useState(false)
+
+  const veiwProductDetails = (id) => {
+    setisOpenProductModel(true);
+  }
+
+  const closeProductModal = () => {
+    setisOpenProductModel(false);
+  }
+
   return (
     <div className="product_row productRow2 w-100 mt-4 d-flex">
       {
@@ -83,8 +94,12 @@ function ProductCardSection() {
             title={product.title}
             oldPrice={product.oldPrice}
             newPrice={product.newPrice}
+            veiwProductDetails={veiwProductDetails}
           />
         ))
+      }
+      {
+        isOpenProductModel === true && <ProductModel closeProductModal = {closeProductModal} />
       }
     </div>
   )
@@ -92,49 +107,49 @@ function ProductCardSection() {
 
 export default ProductCardSection;
 
-const NewProductCard = ({ img, title, oldPrice, newPrice }) => {
+const NewProductCard = ({ img, title, oldPrice, newPrice, veiwProductDetails }) => {
   return (
-      <div className="item productItem mb-4">
-          <div className="imageWrapper">
-              <img src={img} alt={title} className="w-100" />
+    <div className="item productItem mb-4">
+      <div className="imageWrapper">
+        <img src={img} alt={title} className="w-100" />
 
-              <span className="badge badge-primary">28%</span>
+        <span className="badge badge-primary">28%</span>
 
-              <div className="actions">
-                  <Button>
-                      <TfiFullscreen />
-                  </Button>
+        <div className="actions">
+          <Button onClick={()=>veiwProductDetails(1)}>
+            <TfiFullscreen />
+          </Button>
 
-                  <Button>
-                      <IoMdHeartEmpty style={{ fontSize: "20px" }} />
-                  </Button>
-              </div>
-          </div>
-
-          <div className="info">
-              <h4>{title}</h4>
-
-              <span className="text-success d-block">
-                  In Stock
-              </span>
-
-              <Rating
-                  className="mt-2 mb-2"
-                  value={5}
-                  readOnly
-                  size="small"
-              />
-
-              <div className="d-flex">
-                  <span className="oldPrice">
-                      {oldPrice}
-                  </span>
-
-                  <span className="netPrice text-danger ml-2">
-                      {newPrice}
-                  </span>
-              </div>
-          </div>
+          <Button>
+            <IoMdHeartEmpty style={{ fontSize: "20px" }} />
+          </Button>
+        </div>
       </div>
+
+      <div className="info">
+        <h4>{title}</h4>
+
+        <span className="text-success d-block">
+          In Stock
+        </span>
+
+        <Rating
+          className="mt-2 mb-2"
+          value={5}
+          readOnly
+          size="small"
+        />
+
+        <div className="d-flex">
+          <span className="oldPrice">
+            {oldPrice}
+          </span>
+
+          <span className="netPrice text-danger ml-2">
+            {newPrice}
+          </span>
+        </div>
+      </div>
+    </div>
   );
 };
