@@ -1,13 +1,29 @@
 import Button from '@mui/material/Button';
 import { IoIosMenu } from "react-icons/io"
 import { FaAngleDown } from "react-icons/fa6"
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { FaAngleRight } from 'react-icons/fa6';
 
 const Navigation = () => {
 
-    const [isOpenSidebarVal, setIsOpenSidebarVal] = useState(true);
+    const location = useLocation();
+
+const [isOpenSidebarVal, setIsOpenSidebarVal] = useState(false);
+const [isUserToggled, setIsUserToggled] = useState(false);
+
+// Route-based default (sirf jab user ne manually toggle na kiya ho)
+useEffect(() => {
+    if (!isUserToggled) {
+        setIsOpenSidebarVal(location.pathname === "/");
+    }
+}, [location.pathname, isUserToggled]);
+
+// Button click handler
+const handleToggleSidebar = () => {
+    setIsOpenSidebarVal(prev => !prev);
+    setIsUserToggled(true);
+};
 
     return (
         <nav>
@@ -15,7 +31,7 @@ const Navigation = () => {
                 <div className="row">
                     <div className="col-sm-2 navpart1">
                         <div className="cartWrapper">
-                            <Button className='allCatTab' onClick={() => setIsOpenSidebarVal(!isOpenSidebarVal)}>
+                            <Button className='allCatTab' onClick={handleToggleSidebar}>
                                 <span className='icon1 mr-2'><IoIosMenu /></span>
                                 <span className='text'>ALL CATEGORIES</span>
                                 <span className='icon2 ml-2'><FaAngleDown /></span>
@@ -91,7 +107,7 @@ const Navigation = () => {
                                     <Link to='/'><Button>Perfume</Button></Link>
                                     <Link to='/'><Button>Accessories</Button></Link>
                                 </div></li>
-                            <li className="list-inline-item"><Link to='/'><Button>beauty</Button></Link></li>
+                            <li className="list-inline-item"><Link to='/'><Button>Shop</Button></Link></li>
                             <li className="list-inline-item"><Link to='/'><Button>watches</Button></Link></li>
 
                             <li className="list-inline-item nav-item">
