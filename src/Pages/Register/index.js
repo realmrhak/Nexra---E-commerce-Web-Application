@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [form, setForm] = useState({
+    name: "",
     email: "",
     password: "",
-    remember: false,
+    confirmPassword: "",
+    agree: false,
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -21,6 +24,12 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     console.log(form);
   };
 
@@ -38,10 +47,27 @@ const LoginPage = () => {
           </div>
 
           <h5 className="auth-title text-center mb-4">
-            Sign in to your account
+            Create your account
           </h5>
 
           <form onSubmit={handleSubmit}>
+
+            {/* Name */}
+            <div className="form-group">
+              <label>Full name</label>
+              <div className="input-group-custom">
+                <User className="input-icon-left" />
+                <input
+                  type="text"
+                  className="custom-input"
+                  name="name"
+                  placeholder="Jane Doe"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
 
             {/* Email */}
             <div className="form-group">
@@ -62,24 +88,18 @@ const LoginPage = () => {
 
             {/* Password */}
             <div className="form-group">
-              <div className="d-flex justify-content-between">
-                <label>Password</label>
-
-              </div>
-
+              <label>Password</label>
               <div className="input-group-custom">
                 <Lock className="input-icon-left" />
-
                 <input
                   type={showPassword ? "text" : "password"}
                   className="custom-input"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Create a password"
                   value={form.password}
                   onChange={handleChange}
                   required
                 />
-
                 <button
                   type="button"
                   className="input-icon-right"
@@ -90,43 +110,57 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <div className="auth-options">
-
-              {/* Remember me */}
-              <div className="form-check">
+            {/* Confirm Password */}
+            <div className="form-group">
+              <label>Confirm password</label>
+              <div className="input-group-custom">
+                <Lock className="input-icon-left" />
                 <input
-                  type="checkbox"
-                  className="form-check-input"
-                  name="remember"
-                  checked={form.remember}
+                  type={showConfirm ? "text" : "password"}
+                  className="custom-input"
+                  name="confirmPassword"
+                  placeholder="Repeat password"
+                  value={form.confirmPassword}
                   onChange={handleChange}
+                  required
                 />
-                <label className="form-check-label">
-                  Remember me
-                </label>
+                <button
+                  type="button"
+                  className="input-icon-right"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                >
+                  {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
+            </div>
 
-              {/* Forgot Password */}
-              <Link to="/forgot-password" className="auth-link small-link">
-                Forgot Password?
-              </Link>
-
+            {/* Checkbox */}
+            <div className="form-check mb-3">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                name="agree"
+                checked={form.agree}
+                onChange={handleChange}
+                required
+              />
+              <label className="form-check-label">
+                I agree to the terms and privacy
+              </label>
             </div>
 
             {/* Button */}
             <button type="submit" className="auth-btn">
-              Sign in
+              Sign up
             </button>
           </form>
 
           {/* Footer */}
           <div className="auth-footer mt-3 text-center">
             <small>
-              Don’t have an account?{" "}
-
-              {/* 🔗 Register Link */}
-              <Link to="/register" className="auth-link">
-                Sign up
+              Already have an account?{" "}
+              <Link to="/login" className="auth-link">
+                Sign in
               </Link>
             </small>
           </div>
@@ -137,4 +171,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
