@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import VertBannerBox from '../../Assets/Images/Banners/Listing_Vertical_Banner.png';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { FolderTree, DollarSign, PackageCheck, Tag } from 'lucide-react';
 
 function Sidebar({ onFilterChange }) {
   const { categories } = useApp();
@@ -20,6 +19,7 @@ function Sidebar({ onFilterChange }) {
     searchParams.getAll('category').length ? searchParams.getAll('category') : []
   );
   const [selectedStatus, setSelectedStatus] = useState(searchParams.getAll('status'));
+  const [selectedBrands, setSelectedBrands] = useState([]);
 
   // Sync URL changes
   useEffect(() => {
@@ -76,31 +76,38 @@ function Sidebar({ onFilterChange }) {
 
   return (
     <div className="sidebar">
+      {/* ===== Product Categories ===== */}
       <div className="filterBox">
-        <h6 className='mb-3'>Product Categories</h6>
+        <h6 className='mb-3 sidebarFilterTitle'>
+          <FolderTree size={16} className="sidebarFilterIcon" />
+          Product Categories
+        </h6>
         <div className='scroll'>
-          <ul>
-            {categories.length === 0 && <li>Loading...</li>}
+          <ul className="sidebarCheckList">
+            {categories.length === 0 && <li className="sidebarCheckItem">Loading...</li>}
             {categories.map((c) => (
-              <li key={c._id}>
-                <FormControlLabel
-                  className='w-100'
-                  control={
-                    <Checkbox
-                      checked={selectedCats.includes(c.slug)}
-                      onChange={() => toggleCat(c.slug)}
-                    />
-                  }
-                  label={c.name}
-                />
+              <li key={c._id} className="sidebarCheckItem">
+                <label className="sidebarCheckbox">
+                  <input
+                    type="checkbox"
+                    checked={selectedCats.includes(c.slug)}
+                    onChange={() => toggleCat(c.slug)}
+                  />
+                  <span className="sidebarCheckmark"></span>
+                  <span className="sidebarCheckLabel">{c.name}</span>
+                </label>
               </li>
             ))}
           </ul>
         </div>
       </div>
 
+      {/* ===== Filter by Price ===== */}
       <div className="filterBox">
-        <h6 className='mb-3'>Filter by Price</h6>
+        <h6 className='mb-3 sidebarFilterTitle'>
+          <DollarSign size={16} className="sidebarFilterIcon" />
+          Filter by Price
+        </h6>
         <RangeSlider
           value={value}
           onInput={applyPrice}
@@ -109,54 +116,60 @@ function Sidebar({ onFilterChange }) {
           step={5}
         />
         <div className="d-flex pt-2 pb-2 priceRange">
-          <span>From: <strong className="text-dark">${value[0]}</strong></span>
-          <span className="ml-auto">To: <strong className="text-dark">${value[1]}</strong></span>
+          <span>From: <strong className="priceRangeValue">${value[0]}</strong></span>
+          <span className="ml-auto">To: <strong className="priceRangeValue">${value[1]}</strong></span>
         </div>
       </div>
 
+      {/* ===== Product Status ===== */}
       <div className="filterBox">
-        <h6 className='mb-3'>Product Status</h6>
+        <h6 className='mb-3 sidebarFilterTitle'>
+          <PackageCheck size={16} className="sidebarFilterIcon" />
+          Product Status
+        </h6>
         <div className='scroll'>
-          <ul>
-            <li>
-              <FormControlLabel
-                className='w-100'
-                control={
-                  <Checkbox
-                    checked={selectedStatus.includes('inStock')}
-                    onChange={() => toggleStatus('inStock')}
-                  />
-                }
-                label='In Stock'
-              />
+          <ul className="sidebarCheckList">
+            <li className="sidebarCheckItem">
+              <label className="sidebarCheckbox">
+                <input
+                  type="checkbox"
+                  checked={selectedStatus.includes('inStock')}
+                  onChange={() => toggleStatus('inStock')}
+                />
+                <span className="sidebarCheckmark"></span>
+                <span className="sidebarCheckLabel">In Stock</span>
+              </label>
             </li>
-            <li>
-              <FormControlLabel
-                className='w-100'
-                control={
-                  <Checkbox
-                    checked={selectedStatus.includes('onSale')}
-                    onChange={() => toggleStatus('onSale')}
-                  />
-                }
-                label='On Sale'
-              />
+            <li className="sidebarCheckItem">
+              <label className="sidebarCheckbox">
+                <input
+                  type="checkbox"
+                  checked={selectedStatus.includes('onSale')}
+                  onChange={() => toggleStatus('onSale')}
+                />
+                <span className="sidebarCheckmark"></span>
+                <span className="sidebarCheckLabel">On Sale</span>
+              </label>
             </li>
           </ul>
         </div>
       </div>
 
+      {/* ===== Brands ===== */}
       <div className="filterBox">
-        <h6 className='mb-3'>Brands</h6>
+        <h6 className='mb-3 sidebarFilterTitle'>
+          <Tag size={16} className="sidebarFilterIcon" />
+          Brands
+        </h6>
         <div className='scroll'>
-          <ul>
+          <ul className="sidebarCheckList">
             {brands.map((b) => (
-              <li key={b}>
-                <FormControlLabel
-                  className='w-100'
-                  control={<Checkbox />}
-                  label={b}
-                />
+              <li key={b} className="sidebarCheckItem">
+                <label className="sidebarCheckbox">
+                  <input type="checkbox" />
+                  <span className="sidebarCheckmark"></span>
+                  <span className="sidebarCheckLabel">{b}</span>
+                </label>
               </li>
             ))}
           </ul>

@@ -3,19 +3,33 @@ import Dialog from '@mui/material/Dialog';
 import { MdClose } from 'react-icons/md';
 import Rating from "@mui/material/Rating";
 import QuantityBox from '../QuantityBox';
-import ProductZoom from '../ProductZoom';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { IoShuffleOutline } from "react-icons/io5";
 import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import Slider from 'react-slick';
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/styles.min.css';
+import { useRef } from 'react';
+
+// Fallback images
+import Dress1 from '../../Assets/Images/Items/Dress-1.jpeg';
+import Dress12 from '../../Assets/Images/Items/Dress-1-2.png';
+import Dress13 from '../../Assets/Images/Items/Dress-1-3.png';
+
+const DEFAULT_IMAGES = [Dress1, Dress12, Dress13];
 
 const ProductModel = ({ product, closeProductModal }) => {
     const [qty, setQty] = useState(1);
     const [size, setSize] = useState('');
     const { addToCart } = useCart();
     const navigate = useNavigate();
+
+    // Image slider refs (like original code)
+    const zoomSliderBig = useRef();
+    const zoomSlider = useRef();
 
     if (!product) return null;
 
@@ -29,6 +43,16 @@ const ProductModel = ({ product, closeProductModal }) => {
     const stock = product.stock ?? 0;
     const description = product.description || '';
     const sizes = product.sizes || [];
+
+    // Build images array for slider
+    const imgs = (product.images && product.images.length)
+        ? product.images.map(i => (typeof i === 'string' ? i : i.url))
+        : (image ? [image] : DEFAULT_IMAGES);
+
+    const goto = (index) => {
+        zoomSlider.current?.slickGoTo?.(index);
+        zoomSliderBig.current?.slickGoTo?.(index);
+    };
 
     const handleAddToCart = async () => {
         try {
@@ -44,6 +68,29 @@ const ProductModel = ({ product, closeProductModal }) => {
         const id = product.slug || product._id || product.id;
         closeProductModal();
         navigate(`/product/${id}`);
+    };
+
+    // Slider settings (like original code)
+    const settingsBig = {
+        dots: false,
+        infinite: false,
+        speed: 700,
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        fade: false,
+        arrows: false,
+    };
+
+    const settingsThumbs = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToScroll: 1,
+        slidesToShow: Math.min(5, imgs.length),
+        fade: false,
+        arrows: true,
+        swipeToSlide: true,
+        focusOnSelect: true,
     };
 
     return (
@@ -64,7 +111,39 @@ const ProductModel = ({ product, closeProductModal }) => {
 
             <div className="row mt-2 productDetailsModel">
                 <div className="col-md-5">
-                    <ProductZoom images={product.images || (image ? [{ url: image }] : [])} />
+                    {/* ===== Image Slider with thumbnails (like original code) ===== */}
+                    <div className="productZoom">
+                        <div className='ProductZoom position-relative'>
+                            <Slider {...settingsBig} className='zoomSliderBig' ref={zoomSliderBig}>
+                                {imgs.map((src, i) => (
+                                    <div className='item' key={i}>
+                                        <InnerImageZoom
+                                            zoomType='hover'
+                                            zoomScale={1}
+                                            src={src}
+                                            alt={`${title} - image ${i + 1}`}
+                                        />
+                                    </div>
+                                ))}
+                            </Slider>
+                        </div>
+
+                        {imgs.length > 1 && (
+                            <Slider {...settingsThumbs} className='zoomSlider' ref={zoomSlider}>
+                                {imgs.map((src, i) => (
+                                    <div className='item' key={i}>
+                                        <img
+                                            className='w-100'
+                                            src={src}
+                                            alt={`${title} thumbnail ${i + 1}`}
+                                            onClick={() => goto(i)}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                ))}
+                            </Slider>
+                        )}
+                    </div>
                 </div>
 
                 <div className="col-md-7">

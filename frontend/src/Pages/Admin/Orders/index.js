@@ -85,12 +85,12 @@ const Orders = () => {
             }}
           />
           <select
+            className="adminFilterSelect"
             value={statusFilter}
             onChange={(e) => {
               setStatusFilter(e.target.value);
               setPage(1);
             }}
-            style={{ padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 14 }}
           >
             <option value="">All statuses</option>
             {STATUS_FLOW.map((s) => (
@@ -140,15 +140,7 @@ const Orders = () => {
                       <select
                         value={o.status}
                         onChange={(e) => handleStatusChange(o._id, e.target.value)}
-                        className={`adminStatus ${o.status}`}
-                        style={{
-                          border: 'none',
-                          cursor: 'pointer',
-                          padding: '4px 8px',
-                          borderRadius: 12,
-                          fontSize: 11,
-                          fontWeight: 600,
-                        }}
+                        className={`adminStatusSelect ${o.status}`}
                       >
                         {STATUS_FLOW.map((s) => (
                           <option key={s} value={s}>{STATUS_LABELS[s]}</option>

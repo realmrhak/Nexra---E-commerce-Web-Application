@@ -7,35 +7,35 @@ import Banner3 from '../../Assets/Images/Banners/Banner-3.jpeg';
 const HomeBanner = () => {
 
     var settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true
-  };
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        autoplay: true
+    };
 
     return (
         <>
-        <div className="homeBannerSec">
-            <div className="row">
-                <div className="col-md-3"></div>
-                <div className="col-md-9">
-            <Slider {...settings}>
-            <div className="item">
-                <img src={Banner2} alt="Banner"  />
+            <div className="homeBannerSec">
+                <div className="row">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-9">
+                        <Slider {...settings}>
+                            <div className="item">
+                                <img src={Banner2} alt="Banner" />
+                            </div>
+                            <div className="item">
+                                <img src={Banner1} alt="Banner" />
+                            </div>
+                            <div className="item">
+                                <img src={Banner3} alt="Banner" />
+                            </div>
+                        </Slider>
+                    </div>
+                </div>
             </div>
-            <div className="item">
-                <img src={Banner1} alt="Banner"  />
-            </div>
-            <div className="item">
-                <img src={Banner3} alt="Banner"  />
-            </div>
-            </Slider>
-            </div>
-            </div>
-        </div>
         </>
     )
 }
