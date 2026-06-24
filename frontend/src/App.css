@@ -4669,3 +4669,16 @@ textarea:focus-visible {
 [data-theme="dark"] footer .footer-left p {
   color: #b0b0b0 !important;
 }
+
+/* ================================================================== */
+/* SPIN ANIMATION for loading icons                                    */
+/* ================================================================== */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}

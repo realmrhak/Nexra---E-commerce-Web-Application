@@ -144,8 +144,38 @@ app.use(errorHandler);
 // ============ START ============
 const PORT = process.env.PORT || 5000;
 
+/**
+ * Auto-seed the database if it's empty on server startup.
+ * This ensures Render/Vercel deployments have data even if
+ * `npm run seed` wasn't run manually.
+ *
+ * Set AUTO_SEED=false in env to disable.
+ */
+const autoSeedIfEmpty = async () => {
+  if (process.env.AUTO_SEED === 'false') {
+    console.log('🌱 Auto-seed disabled (AUTO_SEED=false).');
+    return;
+  }
+  try {
+    const { isDatabaseEmpty, runSeed } = await import('./seedData.js');
+    const empty = await isDatabaseEmpty();
+    if (!empty) {
+      console.log('🌱 Database already has products — skipping auto-seed.');
+      return;
+    }
+    console.log('🌱 Database is empty. Auto-seeding default data...');
+    const summary = await runSeed({ clearFirst: false });
+    console.log(`✅ Auto-seed complete: ${summary.categories} categories, ${summary.products} products, ${summary.slides} slides, ${summary.coupons} coupons.`);
+    console.log(`🔑 Admin login: ${summary.adminEmail} / ${process.env.SEED_ADMIN_PASSWORD || 'Admin@123'}`);
+  } catch (err) {
+    console.error('⚠️  Auto-seed failed (server will still start):', err.message);
+  }
+};
+
 const start = async () => {
   await connectDB();
+  // Auto-seed after DB connection (non-blocking — server starts regardless)
+  autoSeedIfEmpty().catch((err) => console.error('Auto-seed error:', err));
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Nexra backend running on port ${PORT} (${process.env.NODE_ENV || 'development'})`);
   });

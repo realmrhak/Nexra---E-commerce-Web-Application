@@ -255,4 +255,44 @@ router.get(
   })
 );
 
+/**
+ * POST /api/admin/seed
+ * Manually trigger a full database re-seed (clears existing data first).
+ * Useful for deployments where `npm run seed` wasn't run.
+ */
+router.post(
+  '/seed',
+  asyncHandler(async (req, res) => {
+    const { runSeed } = await import('../seedData.js');
+    const summary = await runSeed({ clearFirst: true });
+    res.json({
+      success: true,
+      message: 'Database seeded successfully.',
+      data: summary,
+    });
+  })
+);
+
+/**
+ * GET /api/admin/seed-status
+ * Check if the database has data (returns product count).
+ */
+router.get(
+  '/seed-status',
+  asyncHandler(async (req, res) => {
+    const productCount = await Product.countDocuments();
+    const userCount = await User.countDocuments();
+    const categoryCount = await Category.countDocuments();
+    res.json({
+      success: true,
+      data: {
+        isEmpty: productCount === 0,
+        products: productCount,
+        users: userCount,
+        categories: categoryCount,
+      },
+    });
+  })
+);
+
 export default router;
