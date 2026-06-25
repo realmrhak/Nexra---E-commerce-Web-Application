@@ -5277,11 +5277,6 @@ select.form-control option,
   background: #ffffff !important;
 }
 
-.adminFilterSelect option:hover {
-  background-color: #ecfdf5 !important;
-  color: #065f46 !important;
-}
-
 /* Selected option gets a light-green tint */
 .nexraSelect option:checked,
 select.form-control option:checked,
@@ -5411,11 +5406,22 @@ select.form-control option:checked,
 
 /* Smaller, refined buttons for the price row */
 .adminPriceActions .adminCardBtn {
-  width: 30px !important;
-  height: 30px !important;
-  border-radius: 8px !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 6px !important;
   border: 1px solid transparent !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Smaller icon inside the price-row buttons */
+.adminPriceActions .adminCardBtn svg {
+  width: 11px !important;
+  height: 11px !important;
+  stroke-width: 2.2 !important;
 }
 
 .adminPriceActions .adminCardBtn.edit {
@@ -5498,4 +5504,255 @@ select.form-control option:checked,
 .productRow2 .productItem {
   width: 100% !important;
   border-right: none !important;
+}
+
+/* ================================================================== */
+/* FIX — DROPDOWN OPTION HOVER + CHECKED COLOR (#d1fae5)                */
+/* Native <option> elements can't be fully styled cross-browser, but    */
+/* we set hover/checked to the light-green tint where supported.        */
+/* ================================================================== */
+
+.nexraSelect option:hover,
+select.form-control option:hover,
+.adminFilterSelect option:hover,
+.adminStatusSelect option:hover,
+.adminPaymentSelect option:hover,
+.adminCatStatusSelect option:hover {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+}
+
+.nexraSelect option:checked,
+select.form-control option:checked,
+.adminFilterSelect option:checked,
+.adminStatusSelect option:checked,
+.adminPaymentSelect option:checked,
+.adminCatStatusSelect option:checked {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  font-weight: 600 !important;
+}
+
+/* ================================================================== */
+/* FIX — ADMIN TOGGLE SWITCH (Visibility & Marketing in ProductForm)    */
+/* The toggle was rendering but the slider track + knob weren't visible */
+/* because of low contrast / sizing. Make it a proper iOS-style switch. */
+/* ================================================================== */
+
+.adminToggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  position: relative !important;
+  padding: 4px 0 !important;
+}
+
+/* Hide native checkbox completely */
+.adminToggle input[type="checkbox"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+/* The slider track — bigger, clearly visible */
+.adminToggle .toggleSlider {
+  width: 44px !important;
+  height: 24px !important;
+  background: #d1d5db !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  transition: background 0.2s ease !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+  display: inline-block !important;
+}
+
+/* The knob */
+.adminToggle .toggleSlider::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 3px !important;
+  left: 3px !important;
+  width: 18px !important;
+  height: 18px !important;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Checked state — green track, knob slides right */
+.adminToggle input[type="checkbox"]:checked+.toggleSlider {
+  background: #10B981 !important;
+}
+
+.adminToggle input[type="checkbox"]:checked+.toggleSlider::after {
+  transform: translateX(20px) !important;
+}
+
+/* Focus ring for accessibility */
+.adminToggle input[type="checkbox"]:focus+.toggleSlider {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Make the label text next to the toggle clearly readable */
+.adminToggle>span:last-child {
+  font-size: 13px !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+/* ================================================================== */
+/* FIX — DROPDOWN OPTION HOVER + CHECKED (#d1fae5 green tint)           */
+/* ================================================================== */
+
+.nexraSelect option:hover,
+select.form-control option:hover,
+.adminFilterSelect option:hover,
+.adminStatusSelect option:hover,
+.adminPaymentSelect option:hover,
+.adminCatStatusSelect option:hover {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+}
+
+.nexraSelect option:checked,
+select.form-control option:checked,
+.adminFilterSelect option:checked,
+.adminStatusSelect option:checked,
+.adminPaymentSelect option:checked,
+.adminCatStatusSelect option:checked,
+.nexraSelect option:checked:hover,
+select.form-control option:checked:hover {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  font-weight: 600 !important;
+}
+
+.adminFilterSelect option:checked:hover {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  font-weight: 600 !important;
+}
+
+/* ================================================================== */
+/* FIX — PRODUCTFORM VISIBILITY & MARKETING TOGGLES                      */
+/* The toggle labels were breaking/truncating because the flex container */
+/* had no min-width per item and text could wrap mid-word. Force each    */
+/* toggle to stay on one line with nowrap + min-width.                   */
+/* ================================================================== */
+
+.adminToggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  position: relative !important;
+  padding: 6px 0 !important;
+  white-space: nowrap !important;
+  min-width: 220px !important;
+  flex-shrink: 0 !important;
+}
+
+.adminToggle input[type="checkbox"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+.adminToggle .toggleSlider {
+  width: 44px !important;
+  height: 24px !important;
+  background: #d1d5db !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  transition: background 0.2s ease !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+  display: inline-block !important;
+}
+
+.adminToggle .toggleSlider::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 3px !important;
+  left: 3px !important;
+  width: 18px !important;
+  height: 18px !important;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  transition: transform 0.2s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.adminToggle input[type="checkbox"]:checked+.toggleSlider {
+  background: #10B981 !important;
+}
+
+.adminToggle input[type="checkbox"]:checked+.toggleSlider::after {
+  transform: translateX(20px) !important;
+}
+
+.adminToggle input[type="checkbox"]:focus+.toggleSlider {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+.adminToggle>span:last-child {
+  font-size: 13px !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+}
+
+/* ================================================================== */
+/* FIX — SMALLER EDIT/DELETE BUTTONS ON PRODUCT CARDS                    */
+/* The previous buttons were too large (30px). Reduce to 26px with       */
+/* smaller icons for a more compact, refined look.                       */
+/* ================================================================== */
+
+.adminPriceActions .adminCardBtn {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 7px !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.adminPriceActions .adminCardBtn svg {
+  width: 12px !important;
+  height: 12px !important;
+  stroke-width: 2 !important;
+}
+
+.adminPriceActions .adminCardBtn.edit {
+  background: #10B981 !important;
+  color: #ffffff !important;
+}
+
+.adminPriceActions .adminCardBtn.edit:hover {
+  background: #0e9f6e !important;
+  transform: scale(1.08) !important;
+}
+
+.adminPriceActions .adminCardBtn.delete {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+.adminPriceActions .adminCardBtn.delete:hover {
+  background: #dc2626 !important;
+  transform: scale(1.08) !important;
 }

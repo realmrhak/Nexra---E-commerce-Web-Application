@@ -8,6 +8,7 @@ import newsLetterImg from '../../Assets/Images/News_Letter.webp';
 import ProductItem from "../../Components/ProductItem";
 import HomeCat from "../../Components/HomeCategory";
 import HomeSlider from "../../Components/HomeSlider";
+import ProductPickerModal from "../../Components/ProductPickerModal";
 import Button from '@mui/material/Button';
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoMailOutline } from 'react-icons/io5';
@@ -24,6 +25,10 @@ const Home = () => {
 
     const [newProducts, setNewProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    // Admin: product picker for adding to "New Products"
+    const [pickerOpen, setPickerOpen] = useState(false);
+    const [saving, setSaving] = useState(false);
 
     const loadData = useCallback(async () => {
         setLoading(true);
@@ -51,6 +56,26 @@ const Home = () => {
     // When admin deletes a product from the New Products section, remove it from state
     const handleDeleteFromNew = (deletedId) => {
         setNewProducts((prev) => prev.filter((p) => p._id !== deletedId));
+    };
+
+    // Admin: open the product picker to add a product to "New Products"
+    const handleAddProduct = () => {
+        setPickerOpen(true);
+    };
+
+    // Admin: picker confirmed → set isNew: true on the picked product
+    const handlePickerSelect = async (productId) => {
+        setSaving(true);
+        try {
+            await api.put(`/api/products/${productId}`, { isNew: true });
+            toast.success('Product added to New Products!');
+            await loadData();
+        } catch (err) {
+            toast.error(err?.message || 'Failed to add product.');
+        } finally {
+            setSaving(false);
+            setPickerOpen(false);
+        }
     };
 
     const handleNewsletter = (e) => {
@@ -96,11 +121,16 @@ const Home = () => {
                                 <Button className="veiwAllBtn" href="/shop?sort=newest&isNew=true">
                                     View all <IoIosArrowRoundForward />
                                 </Button>
-                                {/* ===== ADMIN-ONLY: Add Product button ===== */}
+                                {/* ===== ADMIN-ONLY: Add Product button (opens product picker) ===== */}
                                 {isAdmin && (
-                                    <Link to="/admin/products/new" className="adminAddCardBtn">
-                                        <Plus size={16} /> Add Product
-                                    </Link>
+                                    <button
+                                        className="adminAddCardBtn"
+                                        onClick={handleAddProduct}
+                                        disabled={saving}
+                                        style={{ border: 'none', cursor: 'pointer' }}
+                                    >
+                                        <Plus size={16} /> {saving ? 'Adding…' : 'Add Product'}
+                                    </button>
                                 )}
                             </div>
 
@@ -159,6 +189,15 @@ const Home = () => {
                     closeProductModal={closeProductModal}
                 />
             )}
+
+            {/* Admin: product picker for adding to New Products */}
+            <ProductPickerModal
+                open={pickerOpen}
+                onClose={() => setPickerOpen(false)}
+                onSelect={handlePickerSelect}
+                title="Pick a product to add to New Products"
+                excludeIds={newProducts.map((p) => p._id).filter(Boolean)}
+            />
         </>
     );
 };
