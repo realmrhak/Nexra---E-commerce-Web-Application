@@ -136,9 +136,9 @@ router.post(
       discount =
         coupon.type === 'percentage'
           ? Math.min(
-              subtotal * (coupon.value / 100),
-              coupon.maxDiscount ?? Infinity
-            )
+            subtotal * (coupon.value / 100),
+            coupon.maxDiscount ?? Infinity
+          )
           : coupon.value;
       discount = Math.round(discount * 100) / 100;
     }
@@ -201,6 +201,26 @@ router.patch(
 
     order.status = status;
     if (status === 'delivered') order.deliveredAt = new Date();
+    await order.save();
+
+    res.json({ success: true, data: order });
+  })
+);
+
+// PATCH /api/orders/:id/payment-status  (admin only)
+router.patch(
+  '/:id/payment-status',
+  protect,
+  adminOnly,
+  asyncHandler(async (req, res) => {
+    const { paymentStatus } = req.body;
+    const valid = ['pending', 'paid', 'failed', 'refunded'];
+    if (!valid.includes(paymentStatus)) throw new ApiError(422, 'Invalid payment status');
+
+    const order = await Order.findById(req.params.id);
+    if (!order) throw new ApiError(404, 'Order not found');
+
+    order.paymentStatus = paymentStatus;
     await order.save();
 
     res.json({ success: true, data: order });

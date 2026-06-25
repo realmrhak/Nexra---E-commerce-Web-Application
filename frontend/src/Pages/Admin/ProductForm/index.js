@@ -254,7 +254,7 @@ const ProductForm = ({ mode }) => {
           </div>
           <div className="formGroup">
             <label>Category</label>
-            <select name="category" value={form.category} onChange={handleChange}>
+            <select name="category" value={form.category} onChange={handleChange} className="nexraSelect" style={{ width: '100%' }}>
               <option value="">— None —</option>
               {categories.map((c) => (
                 <option key={c._id} value={c._id}>{c.name}</option>

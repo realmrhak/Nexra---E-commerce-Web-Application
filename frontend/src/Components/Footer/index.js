@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../Assets/Images/Logo.png";
 
 import { IoIosShirt } from "react-icons/io";
 import { TbTruckDelivery, TbRosetteDiscount } from "react-icons/tb";
@@ -41,7 +40,9 @@ const Footer = () => {
 
                     {/* LEFT */}
                     <div className="col-md-3 footer-left">
-                        <img src={logo} alt="Nexra Logo" className="footer-logo" />
+                        <div className="footerTextLogo">
+                            Ne<span className="brand-x">x</span>ra
+                        </div>
 
                         <p>685 Market Street</p>
                         <p>San Francisco, CA 94105,</p>
@@ -140,7 +141,7 @@ const Footer = () => {
                             </div>
                         </div>
 
-                       
+
 
                     </div>
 

@@ -8,13 +8,11 @@ import SearchBox from './SearchBox';
 import Navigation from './Navigations';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import { useTheme } from '../../context/ThemeContext';
-import { User, Heart, LogOut, Sun, Moon, ShoppingBag } from 'lucide-react';
+import { User, Heart, LogOut, ShoppingBag } from 'lucide-react';
 
 const Header = () => {
     const { user, isAuthenticated, isAdmin, logout } = useAuth();
     const { itemCount, subtotal } = useCart();
-    const { isDark, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -59,16 +57,6 @@ const Header = () => {
                             <SearchBox />
 
                             <div className="part3 d-flex align-items-center ml-auto">
-                                {/* Theme toggle */}
-                                <button
-                                    className="themeToggleBtn mr-3"
-                                    onClick={toggleTheme}
-                                    title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                                    aria-label="Toggle theme"
-                                >
-                                    {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                                </button>
-
                                 {/* Cart in circle */}
                                 <div className="ml-auto cartTab d-flex align-items-center">
                                     <span className='price'>

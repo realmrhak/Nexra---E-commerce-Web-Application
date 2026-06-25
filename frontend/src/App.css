@@ -14,6 +14,20 @@ body {
   overflow-x: hidden;
 }
 
+/* ================================================================== */
+/* CSS VARIABLES (light theme only — dark mode has been removed)        */
+/* ================================================================== */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f7fa;
+  --card-bg: #ffffff;
+  --text-color: #1a1a1a;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --header-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.06);
+}
+
 @media (min-width: 1300px) {
 
   .container,
@@ -205,7 +219,6 @@ a:hover {
   border: 0px !important;
   padding: 0px 20px !important;
 }
-
 
 
 .headerSearch svg {
@@ -564,7 +577,6 @@ nav .navpart2 ul li:hover .submenu {
 }
 
 
-
 .homeBannerSec {
   position: relative;
   overflow: hidden;
@@ -628,7 +640,6 @@ nav .navpart2 ul li:hover .submenu {
   color: #000;
   opacity: 0.8;
 }
-
 
 
 .homeProducts {
@@ -871,7 +882,6 @@ nav .navpart2 ul li:hover .submenu {
 .customSwipNext:hover svg {
   color: #fff;
 }
-
 
 
 /* ============================= */
@@ -1578,7 +1588,6 @@ footer .topInfo .col span {
 .ProductDetails .btn-circle:hover {
   background: #0e9f6e !important;
 }
-
 
 
 .detalsPageTabs {
@@ -3864,203 +3873,6 @@ img onError default {
 }
 
 /* ================================================================== */
-/* DARK MODE — applies to storefront + admin via [data-theme="dark"]   */
-/* ================================================================== */
-
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f7fa;
-  --card-bg: #ffffff;
-  --text-color: #1a1a1a;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --header-bg: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="dark"] {
-  --bg-primary: #191919;
-  --bg-secondary: #232323;
-  --card-bg: #232323;
-  --text-color: #ffffff;
-  --text-muted: #b0b0b0;
-  --border-color: #333333;
-  --header-bg: #232323;
-  --shadow-color: rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="dark"] body {
-  background: var(--bg-primary) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .headerWrapper .header {
-  background: var(--header-bg) !important;
-  border-bottom: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .headerWrapper .top-strip {
-  background: #0e9f6e !important;
-}
-
-[data-theme="dark"] .headerWrapper .header .part2,
-[data-theme="dark"] .headerWrapper .header .part3 {
-  color: var(--text-color);
-}
-
-[data-theme="dark"] .headerWrapper .header .user-name,
-[data-theme="dark"] .headerWrapper .header .price {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .headerWrapper nav {
-  background: var(--header-bg) !important;
-  border-bottom: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .headerWrapper nav .navpart2 ul li a button {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .headerWrapper nav .navpart2 ul li a button:hover {
-  color: #10B981 !important;
-}
-
-[data-theme="dark"] .productItem {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .productItem .info h4,
-[data-theme="dark"] .productItem .info .text-success,
-[data-theme="dark"] .productItem .info .text-danger,
-[data-theme="dark"] .productItem .info .netPrice {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .productItem .imageWrapper {
-  background: var(--bg-secondary) !important;
-}
-
-/* Dark mode for sections */
-[data-theme="dark"] .homeProducts,
-[data-theme="dark"] .ProductDetails,
-[data-theme="dark"] .cartPage,
-[data-theme="dark"] .product_listing_page,
-[data-theme="dark"] .section {
-  background: var(--bg-primary) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .homeProducts .hd,
-[data-theme="dark"] .homeCat .hd,
-[data-theme="dark"] .ProductDetails .hd,
-[data-theme="dark"] .cartPage .hd {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .text-light {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .card,
-[data-theme="dark"] .cartDetails,
-[data-theme="dark"] .box,
-[data-theme="dark"] .box2 {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .table {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .table thead th {
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .table td {
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] footer {
-  background: #0f172a !important;
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] footer .footer-column ul li {
-  color: var(--text-muted);
-}
-
-[data-theme="dark"] .newsLetterSection {
-  background: var(--bg-secondary) !important;
-}
-
-/* Auth pages */
-[data-theme="dark"] .auth-wrapper {
-  background: var(--bg-primary) !important;
-}
-
-[data-theme="dark"] .auth-card {
-  background: var(--card-bg) !important;
-  box-shadow: 0 4px 20px var(--shadow-color) !important;
-}
-
-[data-theme="dark"] .auth-card .auth-title,
-[data-theme="dark"] .auth-card .auth-brand,
-[data-theme="dark"] .auth-card label {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .auth-card .custom-input {
-  background: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .auth-card .input-icon-left,
-[data-theme="dark"] .auth-card small {
-  color: var(--text-muted) !important;
-}
-
-/* Listing sidebar */
-[data-theme="dark"] .product_listing_page .productListing .sidebar .filterBox {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .product_listing_page .productListing .sidebar .filterBox h6,
-[data-theme="dark"] .product_listing_page .productListing .sidebar .filterBox label {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .product_listing_page .productListing .content_right .showBy {
-  background: var(--bg-secondary) !important;
-}
-
-/* Product detail tabs */
-[data-theme="dark"] .ProductDetails .detalsPageTabs {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .ProductDetails .detalsPageTabs .tabContent p,
-[data-theme="dark"] .ProductDetails .detalsPageTabs .tabContent th,
-[data-theme="dark"] .ProductDetails .detalsPageTabs .tabContent td {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .breadcrumbWrapper {
-  background: var(--bg-secondary) !important;
-}
-
-[data-theme="dark"] .breadcrumbWrapper .breadcrumb li a {
-  color: var(--text-muted) !important;
-}
-
-/* ================================================================== */
 /* HEADER REDESIGN — flexbox layout, compact search                    */
 /* ================================================================== */
 
@@ -4292,10 +4104,6 @@ img onError default {
   background: #fef2f2 !important;
 }
 
-[data-theme="dark"] .profileMenuItem.logout:hover {
-  background: rgba(239, 68, 68, 0.15) !important;
-}
-
 /* ================================================================== */
 /* ADMIN SIDEBAR — LIGHT MODE: white bg + dark text                     */
 /* DARK MODE: #191919 bg + #fff text                                    */
@@ -4340,33 +4148,6 @@ img onError default {
 
 .adminSidebar .adminLogoutBtn:hover {
   color: #ef4444 !important;
-}
-
-[data-theme="dark"] .adminSidebar {
-  background: #191919 !important;
-  color: #fff !important;
-  border-right-color: #333;
-}
-
-[data-theme="dark"] .adminSidebar .adminBrand {
-  color: #fff !important;
-  border-bottom-color: #333 !important;
-}
-
-[data-theme="dark"] .adminSidebar .adminNav li a,
-[data-theme="dark"] .adminSidebar .adminNav li button {
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] .adminSidebar .adminNav li a:hover,
-[data-theme="dark"] .adminSidebar .adminNav li button:hover {
-  background: #232323 !important;
-  color: #10B981 !important;
-}
-
-[data-theme="dark"] .adminSidebar .adminFooter {
-  border-top-color: #333 !important;
-  color: #b0b0b0 !important;
 }
 
 /* ================================================================== */
@@ -4421,81 +4202,6 @@ img onError default {
   .adminUserName {
     display: none;
   }
-}
-
-/* ================================================================== */
-/* DARK MODE — ADMIN PANEL                                              */
-/* ================================================================== */
-
-[data-theme="dark"] .adminLayout {
-  background: var(--bg-primary) !important;
-}
-
-[data-theme="dark"] .adminTopbar {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .adminTopbar .pageTitle {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .adminContent {
-  background: var(--bg-primary) !important;
-}
-
-[data-theme="dark"] .adminPanel,
-[data-theme="dark"] .adminStatCard {
-  background: var(--card-bg) !important;
-  box-shadow: 0 1px 3px var(--shadow-color) !important;
-}
-
-[data-theme="dark"] .adminPanel h3,
-[data-theme="dark"] .adminPanel h4,
-[data-theme="dark"] .adminStatCard .statValue,
-[data-theme="dark"] .adminStatCard .statLabel,
-[data-theme="dark"] .adminTopProductItem .info h6 {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .adminTable th {
-  background: var(--bg-secondary) !important;
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .adminTable td {
-  color: var(--text-color) !important;
-  border-color: var(--border-color) !important;
-}
-
-[data-theme="dark"] .adminTable tr:hover td {
-  background: var(--bg-secondary) !important;
-}
-
-[data-theme="dark"] .adminForm label {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .adminForm input,
-[data-theme="dark"] .adminForm select,
-[data-theme="dark"] .adminForm textarea,
-[data-theme="dark"] .adminSearchBar input {
-  background: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .adminSearchBar input::placeholder {
-  color: var(--text-muted) !important;
-}
-
-[data-theme="dark"] .profileSidebar,
-[data-theme="dark"] .profileMenu {
-  background: var(--card-bg) !important;
-}
-
-[data-theme="dark"] .profileMenuItem {
-  color: var(--text-color) !important;
 }
 
 /* ================================================================== */
@@ -4671,66 +4377,6 @@ img onError default {
   top: 100px;
 }
 
-[data-theme="dark"] .profilePage .profileSidebar button,
-[data-theme="dark"] .profilePage .profileSidebar a {
-  color: var(--text-color) !important;
-}
-
-/* ================================================================== */
-/* CART PAGE — dark mode for inputs                                     */
-/* ================================================================== */
-
-[data-theme="dark"] .cartPage select,
-[data-theme="dark"] .cartPage input {
-  background: var(--bg-secondary) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .cartPage select option {
-  background: var(--card-bg) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .cartPage .cartItemImgWrapper .info h6 {
-  color: var(--text-color) !important;
-}
-
-/* ================================================================== */
-/* CHECKOUT PAGE — dark mode                                            */
-/* ================================================================== */
-
-[data-theme="dark"] .checkoutPage .card,
-[data-theme="dark"] .checkoutPage input,
-[data-theme="dark"] .checkoutPage select,
-[data-theme="dark"] .checkoutPage textarea {
-  background: var(--card-bg) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .checkoutPage h2,
-[data-theme="dark"] .checkoutPage h5,
-[data-theme="dark"] .checkoutPage label {
-  color: var(--text-color) !important;
-}
-
-/* ================================================================== */
-/* ORDER CONFIRMATION — dark mode                                       */
-/* ================================================================== */
-
-[data-theme="dark"] .orderConfirmation .card,
-[data-theme="dark"] .orderConfirmation h2,
-[data-theme="dark"] .orderConfirmation h5,
-[data-theme="dark"] .orderConfirmation p,
-[data-theme="dark"] .orderConfirmation strong {
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .orderConfirmation .card {
-  background: var(--card-bg) !important;
-}
-
 /* ================================================================== */
 /* SEARCH BAR — compact and responsive                                  */
 /* ================================================================== */
@@ -4769,14 +4415,9 @@ img onError default {
 /*  */
 
 
-
 .headerSearch button svg {
   color: #10B981 !important;
   font-size: 19px;
-}
-
-[data-theme="dark"] .headerSearch input {
-  color: var(--text-color) !important;
 }
 
 /* ================================================================== */
@@ -4846,18 +4487,6 @@ textarea:focus-visible {
   color: #1a1a1a !important;
 }
 
-[data-theme="dark"] .nexraTextLogo {
-  color: #ffffff !important;
-}
-
-[data-theme="dark"] .nexraTextLogo:hover {
-  color: #ffffff !important;
-}
-
-[data-theme="dark"] .nexraTextLogo .brand-x {
-  color: #10B981 !important;
-}
-
 @media (max-width: 767px) {
   .nexraTextLogo {
     font-size: 22px;
@@ -4894,11 +4523,6 @@ textarea:focus-visible {
 .headerWrapper .header .cartCircle svg {
   color: #fff !important;
   font-size: 18px !important;
-}
-
-[data-theme="dark"] .headerWrapper .header .cartCircle {
-  background: #10B981 !important;
-  color: #fff !important;
 }
 
 /* ================================================================== */
@@ -4949,163 +4573,6 @@ textarea:focus-visible {
   background: #f5f7fa;
 }
 
-[data-theme="dark"] .adminLayout {
-  background: #191919;
-}
-
-[data-theme="dark"] .adminContent {
-  background: #191919 !important;
-}
-
-[data-theme="dark"] .adminTopbar {
-  background: #232323 !important;
-  border-color: #333 !important;
-}
-
-[data-theme="dark"] .adminTopbar .pageTitle {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .adminTopbar .adminUserName {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .adminPanel,
-[data-theme="dark"] .adminStatCard {
-  background: #232323 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-}
-
-[data-theme="dark"] .adminPanel h3,
-[data-theme="dark"] .adminPanel h4,
-[data-theme="dark"] .adminStatCard .statValue,
-[data-theme="dark"] .adminStatCard .statLabel,
-[data-theme="dark"] .adminTopProductItem .info h6,
-[data-theme="dark"] .adminTopProductItem .info .sub,
-[data-theme="dark"] .adminTopProductItem .revenue {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .adminTable th {
-  background: #191919 !important;
-  color: #b0b0b0 !important;
-  border-color: #333 !important;
-}
-
-[data-theme="dark"] .adminTable td {
-  color: #fff !important;
-  border-color: #333 !important;
-}
-
-[data-theme="dark"] .adminTable tr:hover td {
-  background: #232323 !important;
-}
-
-[data-theme="dark"] .adminForm label {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .adminForm input,
-[data-theme="dark"] .adminForm select,
-[data-theme="dark"] .adminForm textarea,
-[data-theme="dark"] .adminSearchBar input {
-  background: #191919 !important;
-  border-color: #333 !important;
-  color: #fff !important;
-}
-
-[data-theme="dark"] .adminSearchBar input::placeholder,
-[data-theme="dark"] .adminForm input::placeholder,
-[data-theme="dark"] .adminForm textarea::placeholder {
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] .adminUploadBox {
-  background: #191919 !important;
-  border-color: #333 !important;
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] .adminImagePreview {
-  background: #191919 !important;
-  border-color: #333 !important;
-}
-
-[data-theme="dark"] .adminEmpty {
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] .adminStatus {
-  border: 1px solid transparent;
-}
-
-/* Profile menu dark mode */
-[data-theme="dark"] .profileMenu {
-  background: #232323 !important;
-  border-color: #333 !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
-}
-
-[data-theme="dark"] .profileMenuHeader {
-  background: #191919 !important;
-  border-bottom-color: #333 !important;
-}
-
-[data-theme="dark"] .profileMenuHeader .menuUserName {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .profileMenuHeader .menuUserEmail {
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] .profileMenuItem {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .profileMenuItem:hover {
-  background: #191919 !important;
-}
-
-[data-theme="dark"] .profileBtn {
-  background: #232323 !important;
-  border-color: #333 !important;
-}
-
-[data-theme="dark"] .profileBtn .profileName {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .themeToggleBtn {
-  background: #232323 !important;
-  border-color: #333 !important;
-  color: #fff !important;
-}
-
-/* Footer dark mode */
-[data-theme="dark"] footer {
-  background: #191919 !important;
-}
-
-[data-theme="dark"] footer .footerMain,
-[data-theme="dark"] footer .footerBottom {
-  background: #191919 !important;
-}
-
-[data-theme="dark"] footer h4 {
-  color: #fff !important;
-}
-
-[data-theme="dark"] footer .footer-column ul li,
-[data-theme="dark"] footer .footer-copy p,
-[data-theme="dark"] footer .footer-copy span {
-  color: #b0b0b0 !important;
-}
-
-[data-theme="dark"] footer .footer-left p {
-  color: #b0b0b0 !important;
-}
-
 /* ================================================================== */
 /* SPIN ANIMATION for loading icons                                    */
 /* ================================================================== */
@@ -5122,4 +4589,913 @@ textarea:focus-visible {
 
 .spin {
   animation: spin 1s linear infinite;
+}
+
+/* ================================================================== */
+/* FIX 2 — INVENTORY PRODUCT NAME COLOR (dark mode)                     */
+/* The inline `color: '#1a1a1a'` on the product-name div overrode      */
+/* the inherited dark-mode td color. Use a class instead so dark mode  */
+/* can override it.                                                    */
+/* ================================================================== */
+
+.adminTable .prodName {
+  font-weight: 600;
+  color: #1a1a1a;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adminTable .prodNoImage {
+  font-size: 11px;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ================================================================== */
+/* FIX 3 — ORDERS PAGE STATUS DROPDOWNS & FILTER SELECT                 */
+/* The classes `.adminFilterSelect` and `.adminStatusSelect` were      */
+/* referenced in Orders/index.js but had no CSS — they rendered with   */
+/* default browser styling. These rules give them a polished look.     */
+/* ================================================================== */
+
+/* Wrapper that holds the select + chevron icon */
+.adminSelectWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.adminSelectWrap>svg {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+/* The "All statuses" filter dropdown in the orders search bar */
+.adminFilterSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 36px 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+  min-width: 160px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.adminFilterSelect:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.adminFilterSelect:hover {
+  border-color: #10B981;
+}
+
+/* Per-row status dropdown in the orders table */
+.adminStatusSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 6px 30px 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  min-width: 120px;
+  transition: all 0.15s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.adminStatusSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.adminStatusSelect:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Status-coloured variants — background tints with dark text */
+.adminStatusSelect.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.adminStatusSelect.processing {
+  background-color: #fed7aa;
+  color: #9a3412;
+}
+
+.adminStatusSelect.shipped {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.adminStatusSelect.delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.adminStatusSelect.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.adminStatusSelect.returned {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+/* Dark mode variants — slightly darker backgrounds {
+  background-color: #78350f !important;
+  color: #fde68a !important;
+}
+
+/* ================================================================== */
+/* FIX 4 — CATEGORY PAGE: BETTER UI + LUCIDE ICONS + ACTIVE BADGE WIDTH */
+/* Replaces inline styles with proper classes that adapt to dark mode  */
+/* and limits the active/hidden badge to its content width.            */
+/* ================================================================== */
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.categoryCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.categoryCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  border-color: #10B981;
+}
+
+.categoryCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.categoryCardIconBadge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.categoryCardActions {
+  display: flex;
+  gap: 4px;
+}
+
+.categoryCardImgWrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f3f4f6;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.categoryCardImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.categoryCard:hover .categoryCardImgWrap img {
+  transform: scale(1.05);
+}
+
+.categoryCardImgPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 32px;
+  color: #9ca3af;
+}
+
+.categoryCardName {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a1a;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.categoryCardMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.categoryCardMeta svg {
+  color: #9ca3af;
+}
+
+/* The active/hidden badge — limited to its content width only */
+.categoryStatusBadge {
+  align-self: flex-start;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.categoryStatusBadge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.categoryStatusBadge.hidden {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ================================================================== */
+/* FIX 5 — CATEGORY CARD ACTION BUTTONS (pencil & trash)                */
+/* The previous buttons used `.actionBtn` which was only scoped to     */
+/* `.adminTable`, so in category cards they got NO styling and         */
+/* rendered as default browser buttons — looking cartoonish.           */
+/* These standalone rules give them a polished, modern look.           */
+/* ================================================================== */
+
+/* Generic standalone action button (works outside tables too) */
+.categoryCardActions .actionBtn,
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Edit button — emerald accent on hover */
+.categoryCardActions .actionBtn:hover,
+.actionBtn:hover {
+  background: #10B981;
+  color: #ffffff;
+  border-color: #10B981;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Delete button — red accent on hover */
+.categoryCardActions .actionBtn.danger:hover,
+.actionBtn.danger:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+/* Soft tinted default state for category card actions — looks more refined */
+.categoryCardActions .actionBtn {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+.categoryCardActions .actionBtn.danger {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #ef4444;
+}
+
+.categoryCardActions .actionBtn.danger:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+/* ================================================================== */
+/* FIX 6 — ORDERS PAGE: PAYMENT STATUS DROPDOWN                         */
+/* Mirrors the `.adminStatusSelect` styling but for payment status.    */
+/* Variants: pending (amber), paid (green), failed (red), refunded     */
+/* (purple). Works in both light and dark mode.                        */
+/* ================================================================== */
+
+.adminPaymentSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 6px 30px 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  min-width: 110px;
+  transition: all 0.15s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.adminPaymentSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.adminPaymentSelect:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Payment status variants — light mode */
+.adminPaymentSelect.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.adminPaymentSelect.paid {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.adminPaymentSelect.failed {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.adminPaymentSelect.refunded {
+  background-color: #e9d5ff;
+  color: #6b21a8;
+}
+
+/* ================================================================== */
+/* FIX 7 — LOGOUT BUTTON: PREMIUM STYLED BUTTON                         */
+/* The previous logout button was a plain nav item (no border, no      */
+/* background, no padding) — looked too basic. Now it's a proper       */
+/* outlined danger button with hover fill.                             */
+/* ================================================================== */
+
+.adminSidebar .adminLogoutBtn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: calc(100% - 32px) !important;
+  margin: 0 16px 16px;
+  padding: 11px 16px !important;
+  border-radius: 10px;
+  border: 1.5px solid #fecaca !important;
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 2px rgba(239, 68, 68, 0.08);
+}
+
+.adminSidebar .adminLogoutBtn:hover {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.35);
+}
+
+.adminSidebar .adminLogoutBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.25);
+}
+
+.adminSidebar .adminLogoutBtn svg {
+  flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+
+.adminSidebar .adminLogoutBtn:hover svg {
+  transform: translateX(2px);
+}
+
+/* Make the footer wrapper sit nicely below the nav */
+.adminSidebar .adminFooter {
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
+}
+
+/* ================================================================== */
+/* FIX 8 — BREADCRUMB DARK MODE                                          */
+/* The `.breadcrumb` element had `background: #fff !important` which    */
+/* overrode the dark-mode `.breadcrumbWrapper` background {
+  background: #191919 !important;
+  border-bottom-color: #333 !important;
+}/* ================================================================== */
+/* FIX 9 — PRODUCT CARD "VIEW" BUTTONS IN DARK MODE                     */
+/* The quick-view + wishlist buttons use `background: #fff` with        */
+/* `svg color: #000 !important`. In dark mode the white circle is okay  */
+/* but needs to stay visible, and we keep the icon dark for contrast.   */
+/* However the border `rgba(0, 0, 0 {
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ================================================================== */
+/* FIX 11 — SHOP PAGE SIDEBAR CHECKBOXES (dark mode: white + green tick)*/
+/* The `sidebarCheckbox` / `sidebarCheckmark` classes had NO CSS at all */
+/* so they rendered as default browser checkboxes (invisible in dark).  */
+/* These rules create a custom checkbox: white box, green tick, with    */
+/* full dark-mode support.                                              */
+/* ================================================================== */
+
+.sidebarCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  position: relative;
+}
+
+/* Hide the native checkbox */
+.sidebarCheckbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Custom checkbox box */
+.sidebarCheckmark {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 4px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+/* Green tick (drawn with CSS, hidden until checked) */
+.sidebarCheckmark::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+  position: absolute;
+  top: 1px;
+}
+
+/* Checked state — green background + white tick */
+.sidebarCheckbox input[type="checkbox"]:checked+.sidebarCheckmark {
+  background: #10B981;
+  border-color: #10B981;
+}
+
+.sidebarCheckbox input[type="checkbox"]:checked+.sidebarCheckmark::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* Hover state */
+.sidebarCheckbox:hover .sidebarCheckmark {
+  border-color: #10B981;
+}
+
+/* Focus state for accessibility */
+.sidebarCheckbox input[type="checkbox"]:focus+.sidebarCheckmark {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Label text */
+.sidebarCheckLabel {
+  font-size: 14px;
+  color: #374151;
+  transition: color 0.15s ease;
+}
+
+.sidebarCheckbox:hover .sidebarCheckLabel {
+  color: #10B981;
+}
+
+/* List styling */
+.sidebarCheckList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarCheckItem {
+  margin-bottom: 2px;
+}
+
+/* ================================================================== */
+/* FIX 12 — CATEGORY CARD STATUS DROPDOWN (like the reference design)   */
+/* A clean dropdown button with text + chevron that lets admins toggle  */
+/* Active/Hidden status directly from each category card. Styled to     */
+/* match the reference: rectangular, rounded, tinted background.        */
+/* ================================================================== */
+
+.adminCatStatusSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  align-self: flex-start;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 32px 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+.adminCatStatusSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.adminCatStatusSelect:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Active variant — green tint */
+.adminCatStatusSelect.is-active {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+/* Hidden variant — red tint */
+.adminCatStatusSelect.is-hidden {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* ================================================================== */
+/* GLOBAL UNIFIED DROPDOWN STYLE (matches the reference design)         */
+/* White background, light-gray border, 8px radius, gray chevron.       */
+/* Uses !important to override Bootstrap .form-control + MUI defaults.  */
+/* Applied to: .nexraSelect, select.form-control, .adminFilterSelect    */
+/* ================================================================== */
+
+.nexraSelect,
+select.form-control,
+.adminFilterSelect {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 120px !important;
+  padding: 0 38px 0 14px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: 'Poppins', sans-serif !important;
+  color: #333333 !important;
+  background-color: #ffffff !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 14px !important;
+  height: 42px !important;
+  line-height: 40px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Focus state — emerald accent ring */
+.nexraSelect:focus,
+select.form-control:focus,
+.adminFilterSelect:focus {
+  outline: none !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Hover state */
+.nexraSelect:hover,
+select.form-control:hover,
+.adminFilterSelect:hover {
+  border-color: #10B981 !important;
+}
+
+/* Option list styling */
+.nexraSelect option,
+select.form-control option,
+.adminFilterSelect option {
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  color: #333333 !important;
+  background: #ffffff !important;
+}
+
+.adminFilterSelect option:hover {
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+}
+
+/* Selected option gets a light-green tint */
+.nexraSelect option:checked,
+select.form-control option:checked,
+.adminFilterSelect option:checked {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  font-weight: 600 !important;
+}
+
+/* Full-width .form-control selects unless explicitly auto-width */
+.form-control:not([style*="width: auto"]):not([style*="width:auto"]) {
+  width: 100% !important;
+}
+
+/* ================================================================== */
+/* SHOP PAGE — "Show X" MUI BUTTON DROPDOWN (same size as Sort dropdown) */
+/* Both Sort select and Show button get 42px height + matching style.   */
+/* ================================================================== */
+
+.showByFilter button {
+  min-width: auto !important;
+  min-height: auto !important;
+  width: auto !important;
+  height: 42px !important;
+  padding: 0 38px 0 14px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+  position: relative !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 14px !important;
+  line-height: 40px !important;
+}
+
+/* Hide the default MUI angle-down icon (we use our own chevron) */
+.showByFilter button svg {
+  display: none !important;
+}
+
+.showByFilter button:hover {
+  border-color: #10B981 !important;
+  background-color: #ffffff !important;
+}
+
+/* Dropdown menu (MUI Paper) */
+.showPerPageDropdown .MuiPaper-root {
+  width: 100px !important;
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  overflow: hidden !important;
+  margin-top: 4px !important;
+}
+
+.showPerPageDropdown .MuiMenuItem-root {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  color: #333333 !important;
+  padding: 10px 16px !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  min-width: auto !important;
+  transition: background-color 0.12s ease, color 0.12s ease !important;
+}
+
+.showPerPageDropdown .MuiMenuItem-root:hover {
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+}
+
+.showPerPageDropdown .MuiMenuItem-root.Mui-selected {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  font-weight: 600 !important;
+}
+
+.showPerPageDropdown .MuiMenuItem-root.Mui-selected:hover {
+  background-color: #a7f3d0 !important;
+}
+
+/* ================================================================== */
+/* FIX — SIDEBAR FILTER ICON + TEXT GAP (Shop page sidebar)             */
+/* The `sidebarFilterTitle` + `sidebarFilterIcon` classes had no CSS,   */
+/* so the lucide icon sat flush against the text. Add an 8px gap.       */
+/* ================================================================== */
+
+.sidebarFilterTitle {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.sidebarFilterIcon {
+  flex-shrink: 0 !important;
+  color: #10B981 !important;
+}
+
+/* ================================================================== */
+/* FIX — PRODUCT CARD: EDIT/DELETE BUTTONS ALIGNED WITH PRICE           */
+/* Admin edit/delete buttons move from image top-right to the info row, */
+/* sitting on the right side with the price on the left.                */
+/* ================================================================== */
+
+/* The new admin actions row inside .info (replaces the old top-right overlay) */
+.adminPriceActions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* Smaller, refined buttons for the price row */
+.adminPriceActions .adminCardBtn {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+}
+
+.adminPriceActions .adminCardBtn.edit {
+  background: #10B981 !important;
+  color: #ffffff !important;
+}
+
+.adminPriceActions .adminCardBtn.edit:hover {
+  background: #0e9f6e !important;
+  transform: scale(1.08) !important;
+}
+
+.adminPriceActions .adminCardBtn.delete {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+.adminPriceActions .adminCardBtn.delete:hover {
+  background: #dc2626 !important;
+  transform: scale(1.08) !important;
+}
+
+/* Hide the OLD top-right admin overlay (we moved buttons to price row) */
+.productItem .imageWrapper .adminCardActions {
+  display: none !important;
+}
+
+/* Make the price row a proper flex container so buttons sit on the right */
+.productItem .info .priceRow {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 8px !important;
+  margin-top: auto !important;
+}
+
+/* ================================================================== */
+/* FIX — FOOTER TEXT LOGO (replace image with styled text)              */
+/* ================================================================== */
+
+.footerTextLogo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+  letter-spacing: -0.5px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+.footerTextLogo .brand-x {
+  color: #10B981 !important;
+  font-style: italic;
+  font-weight: 900;
+  margin: 0 1px;
+}
+
+.footerTextLogo:hover {
+  text-decoration: none !important;
+  color: #1a1a1a !important;
+}
+
+/* ================================================================== */
+/* FIX — NEW PRODUCTS SECTION: 8 CARDS, 4 PER ROW                       */
+/* The .productRow2 grid used 24% width (4 per row). Override to force  */
+/* a clean 4-per-row grid that can hold 8 items in 2 rows.              */
+/* ================================================================== */
+
+.productRow2 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 16px !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Each card fills its grid cell */
+.productRow2 .productItem {
+  width: 100% !important;
+  border-right: none !important;
 }

@@ -126,11 +126,11 @@ const Inventory = () => {
                       />
                     </td>
                     <td>
-                      <div style={{ fontWeight: 600, color: '#1a1a1a', maxWidth: 240, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div className="prodName">
                         {p.name}
                       </div>
                       {p.images?.length === 0 && (
-                        <span style={{ fontSize: 11, color: '#f59e0b', display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <span className="prodNoImage">
                           <ImageIcon size={11} /> No image
                         </span>
                       )}

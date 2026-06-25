@@ -68,7 +68,7 @@ const Users = () => {
         <select
           value={roleFilter}
           onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
-          style={{ padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 14 }}
+          className="nexraSelect"
         >
           <option value="">All roles</option>
           <option value="user">Users</option>

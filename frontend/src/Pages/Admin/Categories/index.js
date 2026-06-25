@@ -1,5 +1,8 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { Plus, Pencil, Trash2, Upload, X } from 'lucide-react';
+import {
+  Plus, Pencil, Trash2, Upload, X, Tags, Package, Hash,
+  AlertTriangle,
+} from 'lucide-react';
 import api from '../../../api/axios';
 import { useApp } from '../../../context/AppContext';
 import toast from 'react-hot-toast';
@@ -100,10 +103,25 @@ const Categories = () => {
     }
   };
 
+  // Toggle category active/hidden status directly from the card dropdown
+  const handleStatusChange = async (cat, newIsActive) => {
+    const nextActive = newIsActive === 'true';
+    try {
+      await api.put(`/api/categories/${cat._id}`, { isActive: nextActive });
+      toast.success(`Category marked as ${nextActive ? 'Active' : 'Hidden'}`);
+      load();
+    } catch (err) {
+      toast.error(err?.message || 'Failed to update status.');
+    }
+  };
+
   return (
     <div className="adminPanel">
       <h3 className="adminPanelTitle">
-        <span>Categories ({categories.length})</span>
+        <span>
+          <Tags size={18} style={{ marginRight: 8, verticalAlign: 'middle', color: '#10B981' }} />
+          Categories ({categories.length})
+        </span>
         <button className="adminBtn primary" onClick={startNew}>
           <Plus size={16} /> Add Category
         </button>
@@ -111,8 +129,8 @@ const Categories = () => {
 
       {/* Form (inline, shown when editing or creating) */}
       {editing && (
-        <form onSubmit={handleSave} className="adminForm" style={{
-          background: '#f9fafb', padding: 16, borderRadius: 8, marginBottom: 16,
+        <form onSubmit={handleSave} className="adminForm categoryForm" style={{
+          padding: 16, borderRadius: 8, marginBottom: 16,
         }}>
           <div className="adminFormRow">
             <div className="formGroup">
@@ -176,43 +194,63 @@ const Categories = () => {
       {/* Categories grid */}
       {categories.length === 0 ? (
         <div className="adminEmpty">
+          <Package size={48} />
           <p>No categories yet. Click "Add Category" to create one.</p>
         </div>
       ) : (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-          gap: 12,
-        }}>
-          {categories.map((c) => (
-            <div key={c._id} style={{
-              background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8, padding: 12,
-              display: 'flex', flexDirection: 'column', gap: 8,
-            }}>
-              <div style={{ width: '100%', aspectRatio: '1 / 1', background: '#f3f4f6', borderRadius: 6, overflow: 'hidden' }}>
-                {c.image?.url ? (
-                  <img src={c.image.url} alt={c.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 32 }}>
-                    {c.icon || '📦'}
+        <div className="categoryGrid">
+          {categories.map((c) => {
+            const isActive = c.isActive !== false;
+            return (
+              <div key={c._id} className="categoryCard">
+                {/* Top row: icon badge + action buttons */}
+                <div className="categoryCardTop">
+                  <div className="categoryCardIconBadge" title="Category">
+                    <Package size={18} />
                   </div>
-                )}
+                  <div className="categoryCardActions">
+                    <button className="actionBtn" onClick={() => startEdit(c)} title="Edit">
+                      <Pencil size={14} />
+                    </button>
+                    <button className="actionBtn danger" onClick={() => setDeleteTarget(c)} title="Delete">
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Category image */}
+                <div className="categoryCardImgWrap">
+                  {c.image?.url ? (
+                    <img src={c.image.url} alt={c.name} />
+                  ) : (
+                    <div className="categoryCardImgPlaceholder">
+                      {c.icon || '📦'}
+                    </div>
+                  )}
+                </div>
+
+                {/* Category name */}
+                <div className="categoryCardName" title={c.name}>{c.name}</div>
+
+                {/* Meta info: order number */}
+                <div className="categoryCardMeta">
+                  <Hash size={12} />
+                  <span>Order: {c.order || 0}</span>
+                </div>
+
+                {/* Status dropdown — styled like the reference design */}
+                <select
+                  value={String(isActive)}
+                  onChange={(e) => handleStatusChange(c, e.target.value)}
+                  className={`adminCatStatusSelect ${isActive ? 'is-active' : 'is-hidden'}`}
+                  title="Change category status"
+                >
+                  <option value="true">Active</option>
+                  <option value="false">Hidden</option>
+                </select>
               </div>
-              <div style={{ fontWeight: 600, fontSize: 14, color: '#1a1a1a' }}>{c.name}</div>
-              <div style={{ fontSize: 11, color: '#6b7280' }}>Order: {c.order || 0}</div>
-              <span className={`adminStatus ${c.isActive === false ? 'cancelled' : 'delivered'}`}>
-                {c.isActive === false ? 'Hidden' : 'Active'}
-              </span>
-              <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
-                <button className="actionBtn" onClick={() => startEdit(c)} title="Edit">
-                  <Pencil size={14} />
-                </button>
-                <button className="actionBtn danger" onClick={() => setDeleteTarget(c)} title="Delete">
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -222,14 +260,27 @@ const Categories = () => {
           position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000, padding: 16,
         }}>
-          <div style={{ background: '#fff', borderRadius: 12, padding: 24, maxWidth: 400, width: '100%' }}>
-            <h4 style={{ marginBottom: 8, fontSize: 16, fontWeight: 600 }}>Delete category?</h4>
-            <p style={{ marginBottom: 20, color: '#6b7280', fontSize: 14 }}>
+          <div className="categoryModal" style={{
+            borderRadius: 12, padding: 24, maxWidth: 400, width: '100%',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: '50%',
+                background: '#fee2e2', color: '#ef4444',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <AlertTriangle size={20} />
+              </div>
+              <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>Delete category?</h4>
+            </div>
+            <p style={{ marginBottom: 20, fontSize: 14, lineHeight: 1.5 }}>
               Delete <strong>"{deleteTarget.name}"</strong>? Products in this category will not be deleted but will lose their category reference.
             </p>
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button className="adminBtn secondary" onClick={() => setDeleteTarget(null)}>Cancel</button>
-              <button className="adminBtn danger" onClick={handleDelete}>Delete</button>
+              <button className="adminBtn danger" onClick={handleDelete}>
+                <Trash2 size={14} /> Delete
+              </button>
             </div>
           </div>
         </div>

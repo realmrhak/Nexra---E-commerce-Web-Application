@@ -14,6 +14,14 @@ const STATUS_LABELS = {
   returned: 'Returned',
 };
 
+const PAYMENT_FLOW = ['pending', 'paid', 'failed', 'refunded'];
+const PAYMENT_LABELS = {
+  pending: 'Pending',
+  paid: 'Paid',
+  failed: 'Failed',
+  refunded: 'Refunded',
+};
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,6 +72,19 @@ const Orders = () => {
       }
     } catch (err) {
       toast.error(err?.message || 'Failed to update order status.');
+    }
+  };
+
+  const handlePaymentStatusChange = async (orderId, newPaymentStatus) => {
+    try {
+      await api.patch(`/api/orders/${orderId}/payment-status`, { paymentStatus: newPaymentStatus });
+      toast.success(`Payment marked as ${PAYMENT_LABELS[newPaymentStatus]}`);
+      load();
+      if (viewOrder?._id === orderId) {
+        setViewOrder({ ...viewOrder, paymentStatus: newPaymentStatus });
+      }
+    } catch (err) {
+      toast.error(err?.message || 'Failed to update payment status.');
     }
   };
 
@@ -132,9 +153,15 @@ const Orders = () => {
                     <td>{o.items?.length || 0}</td>
                     <td style={{ fontWeight: 600, color: '#10B981' }}>${o.total?.toFixed(2)}</td>
                     <td>
-                      <span className={`adminStatus ${o.paymentStatus}`}>
-                        {o.paymentStatus}
-                      </span>
+                      <select
+                        value={o.paymentStatus}
+                        onChange={(e) => handlePaymentStatusChange(o._id, e.target.value)}
+                        className={`adminPaymentSelect ${o.paymentStatus}`}
+                      >
+                        {PAYMENT_FLOW.map((p) => (
+                          <option key={p} value={p}>{PAYMENT_LABELS[p]}</option>
+                        ))}
+                      </select>
                     </td>
                     <td>
                       <select
@@ -202,7 +229,19 @@ const Orders = () => {
             <div style={{ marginBottom: 16, fontSize: 13, color: '#374151' }}>
               <strong>Customer:</strong> {viewOrder.user?.name} ({viewOrder.user?.email})<br />
               <strong>Date:</strong> {new Date(viewOrder.createdAt).toLocaleString()}<br />
-              <strong>Payment:</strong> {viewOrder.paymentMethod.toUpperCase()} ({viewOrder.paymentStatus})
+              <strong>Payment Method:</strong> {viewOrder.paymentMethod.toUpperCase()}
+              <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <strong>Payment Status:</strong>
+                <select
+                  value={viewOrder.paymentStatus}
+                  onChange={(e) => handlePaymentStatusChange(viewOrder._id, e.target.value)}
+                  className={`adminPaymentSelect ${viewOrder.paymentStatus}`}
+                >
+                  {PAYMENT_FLOW.map((p) => (
+                    <option key={p} value={p}>{PAYMENT_LABELS[p]}</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <h5 style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>Shipping Address</h5>

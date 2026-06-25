@@ -111,28 +111,6 @@ const ProductItem = ({ itemView, product, viewProductDetails, onAddToWishlist, o
               <IoMdHeartEmpty style={{ fontSize: "20px" }} />
             </Button>
           </div>
-
-          {/* ===== ADMIN-ONLY: edit + delete icons (top-right, never overlap with .actions) ===== */}
-          {isAdmin && id && (
-            <div className="adminCardActions">
-              <button
-                className="adminCardBtn edit"
-                onClick={handleEdit}
-                title="Edit product"
-                aria-label="Edit product"
-              >
-                <Pencil size={13} />
-              </button>
-              <button
-                className="adminCardBtn delete"
-                onClick={handleDeleteClick}
-                title="Delete product"
-                aria-label="Delete product"
-              >
-                <Trash2 size={13} />
-              </button>
-            </div>
-          )}
         </div>
 
         <div className="info">
@@ -152,11 +130,34 @@ const ProductItem = ({ itemView, product, viewProductDetails, onAddToWishlist, o
             precision={0.5}
           />
 
-          <div className="d-flex align-items-center">
+          {/* Price on the left, admin edit/delete buttons on the right */}
+          <div className="priceRow">
             {oldPrice && <span className="oldPrice">${Number(oldPrice).toFixed(2)}</span>}
             <span className="netPrice text-danger ml-2">
               {price !== null ? `$${price.toFixed(2)}` : '—'}
             </span>
+
+            {/* ===== ADMIN-ONLY: edit + delete buttons aligned with price ===== */}
+            {isAdmin && id && (
+              <div className="adminPriceActions">
+                <button
+                  className="adminCardBtn edit"
+                  onClick={handleEdit}
+                  title="Edit product"
+                  aria-label="Edit product"
+                >
+                  <Pencil size={13} />
+                </button>
+                <button
+                  className="adminCardBtn delete"
+                  onClick={handleDeleteClick}
+                  title="Delete product"
+                  aria-label="Delete product"
+                >
+                  <Trash2 size={13} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
